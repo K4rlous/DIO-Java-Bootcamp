@@ -54,12 +54,6 @@ Java EE (Java Platform, Enterprise Edition)
 Java ME (Java Platform, Micro Edition)
 Java FX
 
-As quatro principais plataformas de desenvolvimento Java são: 
-Java SE (Java Platform, Standard Edition)
-Java EE (Java Platform, Enterprise Edition)
-Java ME (Java Platform, Micro Edition)
-Java FX
-
                 Versionamento de Código com Git e GitHub 
 
 Controlam as versões de um arquivo ao longo do tempo, registram histórico de atualizações do arquivo, gerenciam quais foram as alterações, datas, autores e etc. Organização, Controle e Segurança
@@ -228,8 +222,28 @@ git fetch nome-do-remoto
 
 Por padrão, o git fetch pega todas as atualizações do repositório remoto associado (geralmente chamado de origin). Isso não altera sua branch local até que você decida aplicar as mudanças, como com git merge ou git pull.
 
+Se criam uma issue de número 1, ao arrumarmos e darmos commit na solução do problema, usamos fix #1 no nome do commit, dessa forma corrigimos a issue de número 1
 
 
+                Sintaxe Java (Só vou anotar o que não sei/lembro)
+
+
+Cuidado com o CamelCase e etc, essas paradas de nomeação de classes, arquivos e etc. Normalmente variáveis tipo FINAL, PI, EXEMPLO (toda em maíuscula) indicam variáveis que não podem ser alteradas, uma variável int no estilo ANO_2000 por si só já indica que é 2000 e não deve ser alteradas
+
+Começo de variáveis: letras, $, _ 
+
+expressão Final em variável indica que ela não pode ser alterada = constante!
+
+Nomeação de pacotes: imagine uma empresa chamada HyperTech, ela possui vários setores, se o setor de comercio for fazer um projeto, seria legal usar esse padrão
+com.hypertech.'nomeDoProjeto'
+com de comercio, e por ai vai, e podemos ter 
+com.hypertech.'nomeDoProjeto'.app pra inicializar
+com.hypertech.'nomeDoProjeto'.modelo pra por as classes de modelo
+com.hypertech.'nomeDoProjeto'.util para guardar os utilitários
+com.hypertech.'nomeDoProjeto'.services com regras de negócio e serviço
+A CONVENÇÃO VARIA DE EMPRESA PARA EMPRESA
+
+e por ai vai, os pacotes (pastas) servem para ajudar a organizar os dados!
 
 
 
