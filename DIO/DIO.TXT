@@ -245,5 +245,12 @@ A CONVENÇÃO VARIA DE EMPRESA PARA EMPRESA
 
 e por ai vai, os pacotes (pastas) servem para ajudar a organizar os dados!
 
+JavaBeans são componentes reutilizáveis da plataforma Java que encapsulam dados e lógica de negócios, facilitando a comunicação entre diferentes partes de uma aplicação
 
+Variável no plural só se for um arrray de coisas
 
+Funções com nomes de verbo, concluirProcessamento, Somar e por ai vai
+
+float se encerra com F, float pi = 3.14F (f ou F)
+
+JavaDoc é uma ferramenta utilizada para gerar documentação de código em Java com base em comentários no formato especial, facilitando a leitura e compreensão das funcionalidades de uma aplicação.
