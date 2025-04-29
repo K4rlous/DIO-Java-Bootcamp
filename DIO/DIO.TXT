@@ -254,3 +254,45 @@ Funções com nomes de verbo, concluirProcessamento, Somar e por ai vai
 float se encerra com F, float pi = 3.14F (f ou F)
 
 JavaDoc é uma ferramenta utilizada para gerar documentação de código em Java com base em comentários no formato especial, facilitando a leitura e compreensão das funcionalidades de uma aplicação.
+
+pra executar app fora da IDE é só achar a pasta bin com o .class que queremos rodar através do poweshell ou ms-dos e dar 'java exemplo' sem o .class
+
+Quando você usa o comando javac para compilar um arquivo-fonte Java (.java), ele gera um arquivo de bytecode Java (.class). Esse arquivo .class contém o código que a Máquina Virtual Java (JVM) pode interpretar e executar.
+Se, por exemplo, você tiver um arquivo Programa.java, ao rodar javac Programa.java, o compilador criará Programa.class. Depois, você pode executar esse programa com java Programa.
+
+- Recebendo Argumentos: O método main define um parâmetro String[] args, que é um array de strings contendo os argumentos passados quando o programa é executado.
+- Atribuição de Valores: O programa extrai os valores dos argumentos fornecidos:- args[0]: O primeiro argumento é armazenado na variável nome.
+- args[1]: O segundo argumento é armazenado na variável sobrenome.
+- args[2]: O terceiro argumento, que representa a idade, é convertido para um número inteiro (int).
+- args[3]: O quarto argumento, que representa a altura, é convertido para um número decimal (double).
+
+- Exibição na Tela: Utilizando System.out.println(), o programa imprime:- Uma saudação com o nome e sobrenome.
+- A idade informada.
+- A altura informada em centímetros.
+
+EXEMPLO:
+public class Programa {
+    public static void main(String[] args) {
+        // Obtendo os argumentos da linha de comando
+        String nome = args[0];
+        String sobrenome = args[1];
+        int idade = Integer.parseInt(args[2]);
+        double altura = Double.parseDouble(args[3]);
+
+        // Exibindo as informações
+        System.out.println("Olá, me chamo " + nome + " " + sobrenome);
+        System.out.println("Tenho " + idade + " anos");
+        System.out.println("Minha altura é " + altura + " cm");
+    }
+}
+(é de se esperar que tudo seja String, então por isso o Parse nos outros tipos de dados!)
+
+Se executarmos o programa com os seguintes argumentos:
+java Programa Carlos Silva 25 175.5
+
+Ele gerará a seguinte saída:
+Ola, me chamo Carlos Silva
+Tenho 25 anos
+Minha altura é 175.5 cm
+
+Dentro de um projeto Java no Vscode há uma pasta chamada .vscode que contém um arquivo launch.json, lá podemos definir os argumentos iniciais de execução de um programa!
