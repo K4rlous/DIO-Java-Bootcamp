@@ -296,3 +296,79 @@ Tenho 25 anos
 Minha altura é 175.5 cm
 
 Dentro de um projeto Java no Vscode há uma pasta chamada .vscode que contém um arquivo launch.json, lá podemos definir os argumentos iniciais de execução de um programa!
+
+Erros de programação são denominados bugs e o processo de encontrar e corrigir bugs é chamado de depuração ou debugging.
+
+Existem duas grandes categorias que englobam a natureza do erro:
+
+Erros de Sintaxe:
+É um erro nas regras estabelecidas da linguagem:
+Parênteses, chaves, colchetes que abrem mas não fecham.
+Duas instruções sem um ponto-e-vírgula entre elas;
+Uma palavra-chave sendo usada numa posição inesperada.
+
+Erros de Semântica:
+É um erro na "lógica do código", em sua semântica, o código está sintaticamente correto, porém não faz o que se esperava dele.
+Tentar dividir um número por uma String ou por zero.
+Atribuir um valor incoerente a um tipo de dado.
+Tentar fechar um arquivo que não foi aberto.
+
+Depuração/Debugging
+Linguagens de alto nível tornam a depuração mais fácil, pois fornecem mais ferramentas para identificar erros, como o tratamento de exceções.
+
+Os depuradores funcionam assumindo o controle do tempo de execução de um programa e permitindo que você o observe e controle. Para fazer isso, ele mostra a pilha do programa e permite que você a atravesse em qualquer direção. Quando você está em um depurador, obtém uma imagem mais completa de um quadro de pilha do que quando olha os rastreamentos de pilha em uma mensagem de log.
+
+Pilha de Execução de um Programa Java/Stack Trace
+Pilha de Execução:
+Toda invocação de método é empilhada em uma estrutura de dados que isola a área de memória de cada um. Quando um método termina (retorna), ele volta para o método que o invocou.
+
+Stack Trace:
+É a matriz onde encontramos a pilha de excecução da exceção. Em outras palavras, podemos dizer que o rastreamento da pilha busca (rastreio) para a próxima linha onde a exceção pode surgir.
+
+Lemos a stack trace de baixo para cima!
+
+Tread.dumpStack() imprime o rastreamento da pilha da thread atual no fluxo de erro padrão. Isso é útil para depuração, pois permite verificar onde uma thread está sendo executada em determinado momento.
+
+Breakpoints são essenciais para depuração em Java! Eles permitem que você pause a execução do programa em um ponto específico e analise o estado das variáveis e do fluxo de execução. Aqui estão alguns passos para usá-los em um ambiente de desenvolvimento como o IntelliJ IDEA ou Eclipse:
+- Definir um breakpoint – Clique na margem esquerda ao lado de uma linha de código onde deseja que a execução pare.
+- Executar o programa no modo de depuração – Use a opção de "Debug" ao invés de "Run".
+- Inspecionar variáveis – Quando o programa parar no breakpoint, você pode examinar valores de variáveis no painel de depuração.
+- Passar pelas linhas – Use os comandos "Step Over", "Step Into" e "Step Out" para navegar pelo código.
+- Modificar valores durante a execução – Alguns IDEs permitem alterar valores de variáveis no meio da execução para testar diferentes cenários.
+
+ Esses comandos de depuração ajudam a navegar pelo código em um ambiente de debug. Aqui está o que cada um faz:
+
+Step Over (F8 no IntelliJ IDEA, F6 no Eclipse): Avança para a próxima linha de código sem entrar em métodos chamados na linha atual. Se houver uma chamada de método, ele será executado inteiramente e o depurador passará para a próxima linha no mesmo escopo.
+
+Step Into (F7 no IntelliJ IDEA, F5 no Eclipse): Entra no método chamado na linha atual, permitindo inspecionar sua execução linha por linha.
+
+Force Step Into (Alt + Shift + F7 no IntelliJ IDEA): Ignora otimizações da IDE e entra até mesmo em métodos da biblioteca padrão ou código compilado.
+
+Step Out (Shift + F8 no IntelliJ IDEA, F7 no Eclipse): Sai do método atual e retorna ao seu chamador, útil para concluir rapidamente um método e voltar ao nível superior.
+
+Run to Cursor (Alt + F9 no IntelliJ IDEA, Ctrl + R no Eclipse): Continua a execução até o ponto onde o cursor está, sem a necessidade de um breakpoint.
+
+O Evaluate Expression é uma ferramenta muito útil na depuração de código Java! Ele permite que você avalie expressões ou execute pequenas porções de código no contexto da execução atual do depurador, sem alterar o código-fonte.
+Aqui estão alguns usos comuns:
+- Verificar valores complexos – Você pode inserir qualquer expressão, como myObject.getSomeValue() e visualizar o resultado sem precisar imprimir no console.
+- Modificar valores temporariamente – É possível alterar variáveis no meio da execução para testar diferentes cenários.
+- Testar chamadas de métodos – Avalie um método antes de executá-lo no código principal, garantindo que ele retorna o valor esperado.
+- Expressões booleanas – Confirme rapidamente se uma condição if será verdadeira ou falsa antes de prosseguir.
+
+Ao debuggar pode ser necessário inserir dados no console, confirmar  e apertar em step over para seguir a lógica do programa
+
+--
+Jeito de aceitar vírgulas e pontos 
+
+Scanner scanner = new Scanner(System.in);
+System.out.print("Digite um número decimal: ");
+String input = scanner.nextLine().replace(",", "."); // Lê como string e substitui vírgula por ponto
+
+try {
+    double numero = Double.parseDouble(input); // Faz o parse para Double
+    System.out.println("Número convertido: " + numero);
+} catch (NumberFormatException e) {
+    System.out.println("Entrada inválida!");
+}
+
+só pegar o input como string trocar a , por . e dar um parse depois!
