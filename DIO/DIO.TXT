@@ -372,3 +372,107 @@ try {
 }
 
 só pegar o input como string trocar a , por . e dar um parse depois!
+
+Em Java, especialmente em projetos que seguem padrões como a arquitetura em camadas (comum em aplicações Spring, por exemplo), há uma série de convenções para nomear e organizar classes com base em suas responsabilidades. Essas convenções ajudam a manter o código limpo, organizado e mais fácil de manter. Abaixo, explico as principais categorias de classes e suas convenções:
+
+1. Modelos (Model / Entity)
+Função: Representam entidades do domínio do negócio. Geralmente correspondem a tabelas em um banco de dados.
+
+Convenções:
+
+Nome no singular e representativo do conceito de negócio: User, Product, Order.
+
+Normalmente anotadas com @Entity (em JPA/Hibernate).
+
+Contêm atributos com getters/setters, construtores e métodos auxiliares (como equals() e hashCode()).
+
+2. Repositórios (Repository / DAO)
+Função: Responsáveis pelo acesso a dados (CRUD – Create, Read, Update, Delete).
+
+Convenções:
+
+Interface com sufixo Repository ou Dao: UserRepository, ProductDao.
+
+Usualmente estendem interfaces como JpaRepository, CrudRepository, etc.
+
+Anotados com @Repository (no Spring).
+
+Não contêm regras de negócio, apenas operações de persistência.
+
+3. Serviços (Service)
+Função: Contêm a lógica de negócio da aplicação.
+
+Convenções:
+
+Nome com sufixo Service: UserService, PaymentService.
+
+Normalmente anotadas com @Service.
+
+Chamam métodos de repositórios e manipulam entidades.
+
+Implementam regras de negócio, validações e orquestrações de processos.
+
+4. Controladores (Controller)
+Função: Camada de entrada da aplicação. Lidam com requisições HTTP.
+
+Convenções:
+
+Nome com sufixo Controller: UserController, OrderController.
+
+Anotados com @RestController ou @Controller.
+
+Expõem endpoints com métodos anotados (@GetMapping, @PostMapping, etc.).
+
+Interagem com os serviços para processar as requisições.
+
+5. DTOs (Data Transfer Objects)
+Função: Objetos usados para transportar dados entre camadas (especialmente entre controller e client).
+
+Convenções:
+
+Nome com sufixo DTO: UserDTO, OrderResponseDTO.
+
+Não contêm lógica de negócio.
+
+Podem ter validações com @NotNull, @Size, etc.
+
+6. Utilitários e Helpers
+Função: Contêm métodos auxiliares e utilitários reutilizáveis.
+
+Convenções:
+
+Nome com sufixo Utils ou Helper: DateUtils, StringHelper.
+
+Métodos estáticos.
+
+Não devem depender de estado interno (idealmente stateless).
+
+7. Configurações (Configuration)
+Função: Classes que configuram aspectos da aplicação, como beans, segurança, CORS etc.
+
+Convenções:
+
+Nome com sufixo Config: SecurityConfig, CorsConfig.
+
+Anotadas com @Configuration, @Enable..., @Bean, etc.
+
+Boas práticas gerais:
+Cada classe deve ter uma única responsabilidade.
+
+Os nomes devem ser descritivos e consistentes.
+
+Use pacotes separados para cada camada: model, repository, service, controller, etc.
+
+Classes públicas devem estar em arquivos com o mesmo nome da classe.
+
+Em Java, a criação de pacotes segue convenções que visam manter a organização, legibilidade e modularidade do código. Os nomes de pacotes devem ser escritos sempre em letras minúsculas, sem acentos ou caracteres especiais, e normalmente iniciam com o domínio da organização escrito de forma invertida, como por exemplo com.empresa.projeto. A estrutura dos pacotes costuma refletir a arquitetura da aplicação, sendo comum organizá-los por responsabilidade, como model para entidades de domínio, repository para interfaces de acesso a dados, service para regras de negócio, controller para endpoints REST, dto para objetos de transferência de dados e config para configurações gerais. Em sistemas maiores, é recomendável combinar essa estrutura com uma divisão por módulos de negócio, agrupando as camadas dentro de pacotes como usuario.service, pedido.controller, entre outros, o que facilita a manutenção e favorece a escalabilidade. Além disso, no Spring Boot, a classe principal com a anotação @SpringBootApplication costuma ficar no pacote raiz da aplicação, permitindo o escaneamento automático de todos os componentes nas subpastas. É importante evitar nomes genéricos ou pouco descritivos e manter uma hierarquia de pacotes clara, coerente e alinhada com o domínio da aplicação.
+
+basicamente dentro da src é só fazer um monte de pacote com cada pacote repleto de clases que variam de assunto para assunto!
+
+Em Java, a visibilidade de classes, métodos e atributos é controlada por modificadores de acesso, que determinam onde esses elementos podem ser acessados. O modificador public permite o acesso de qualquer lugar, inclusive de outras classes em pacotes diferentes. O modificador protected permite acesso dentro do mesmo pacote e também por subclasses, mesmo que estejam em pacotes distintos. O modificador default (também chamado de package-private), que ocorre quando nenhum modificador é especificado, permite o acesso apenas dentro do mesmo pacote, mas não fora dele. Já o modificador private restringe o acesso exclusivamente à própria classe onde o elemento foi declarado. Usar esses níveis de acesso corretamente é essencial para garantir o encapsulamento e proteger a integridade dos dados e da lógica da aplicação.
+
+Em Java, enums (ou tipos enumerados) são tipos especiais de classe usados para representar um conjunto fixo e constante de valores. Eles são ideais quando se deseja trabalhar com um grupo definido de opções, como dias da semana, estados de um pedido ou níveis de prioridade. Ao contrário de constantes tradicionais (public static final), enums oferecem mais segurança e funcionalidades orientadas a objetos, podendo ter atributos, métodos e até mesmo comportamentos personalizados.
+
+Um enum é declarado com a palavra-chave enum e cada valor definido dentro dele é uma instância constante dessa enumeração. Por exemplo, um enum DiaSemana pode conter os valores SEGUNDA, TERCA, QUARTA, etc. Além de simples, os enums em Java podem ser estendidos com campos e construtores, permitindo associar valores ou comportamentos específicos a cada constante.
+
+Internamente, enums são classes que herdam da classe java.lang.Enum, não podem ser instanciados diretamente (o construtor é sempre privado) e são imutáveis. Eles também são úteis em estruturas de controle como switch e ajudam a deixar o código mais legível, seguro e expressivo. Ao utilizar enums, evita-se o uso de "valores mágicos" e torna-se o código mais autodescritivo e menos propenso a erros.
