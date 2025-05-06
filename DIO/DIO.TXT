@@ -476,3 +476,14 @@ Em Java, enums (ou tipos enumerados) são tipos especiais de classe usados para 
 Um enum é declarado com a palavra-chave enum e cada valor definido dentro dele é uma instância constante dessa enumeração. Por exemplo, um enum DiaSemana pode conter os valores SEGUNDA, TERCA, QUARTA, etc. Além de simples, os enums em Java podem ser estendidos com campos e construtores, permitindo associar valores ou comportamentos específicos a cada constante.
 
 Internamente, enums são classes que herdam da classe java.lang.Enum, não podem ser instanciados diretamente (o construtor é sempre privado) e são imutáveis. Eles também são úteis em estruturas de controle como switch e ajudam a deixar o código mais legível, seguro e expressivo. Ao utilizar enums, evita-se o uso de "valores mágicos" e torna-se o código mais autodescritivo e menos propenso a erros.
+
+Records em Java são uma forma concisa de criar classes imutáveis (um tipo especial de classe) que servem principalmente para armazenar dados. Introduzidos oficialmente no Java 16, eles geram automaticamente construtor, métodos equals, hashCode e toString, além de acessores (getters) com o nome do campo. Não podem herdar de outras classes, mas podem implementar interfaces. São ideais para representar objetos simples, como DTOs, com menos código, em record todo atributo declarado é privado, lemos seus atributos através de métodos, é possível ter um constrututor adicional, mas precisamos chamar o construtor default do record para isso, podemos passar valores padrões através dele então:
+    Se por o construtor default receber um nome e idade, podemos colocar o construtor default como super do construtor adicional e declarar a idade como '1', então todo objeto criado com o modelo do construtor secundário, isso é, só com nome e sem a idade, vai ficar no padrão "fulano" 1, "beltrano" 1, e por ai vai! <- SOBRECARGA!
+
+public record Pessoa(String nome, int idade) {}
+
+Nesse exemplo:
+
+nome e idade são campos de instância (não estáticos)
+São implicitamente private e final
+Você acessa seus valores pelos métodos nome() e idade()
