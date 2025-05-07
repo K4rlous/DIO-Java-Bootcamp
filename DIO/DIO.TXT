@@ -487,3 +487,20 @@ Nesse exemplo:
 nome e idade são campos de instância (não estáticos)
 São implicitamente private e final
 Você acessa seus valores pelos métodos nome() e idade()
+
+
+Uma classe sealed em Java é uma classe que pode ser estendida somente por classes específicas, definidas explicitamente usando a palavra-chave permits. Isso permite um controle mais rigoroso sobre a herança, garantindo que a classe não seja estendida por qualquer outra classe, apenas pelas que forem mencionadas.
+
+Características:
+sealed: Restringe as subclasses permitidas.
+permits: Lista as classes que podem estender a classe sealed.
+Subclasses podem ser:
+final: Não podem ser estendidas.
+non-sealed: Permitem outras classes para estendê-las.
+sealed: Permite outras classes, mas só com permissões explícitas.
+
+public sealed class Animal permits Dog, Cat { ... }
+public final class Dog extends Animal { ... }
+public non-sealed class Cat extends Animal { ... }
+
+Essa abordagem oferece controle e segurança sobre a herança e pode ser usada para otimizações de desempenho no compilador.
