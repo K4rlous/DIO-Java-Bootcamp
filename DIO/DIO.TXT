@@ -504,3 +504,29 @@ public final class Dog extends Animal { ... }
 public non-sealed class Cat extends Animal { ... }
 
 Essa abordagem oferece controle e segurança sobre a herança e pode ser usada para otimizações de desempenho no compilador.
+
+                Collections
+
+Uma coleção (collection) é uma estrutura de dados que serve para agrupar muitos elementos em uma única unidade (variável); estes elementos precisam ser objetos (SEM TIPOS PRIMITIVOS!).
+Uma Collection pode ter coleções homogêneas e heterogêneas, normalmente utilizamos coleções homogêneas de um tipo específico.
+O núcleo principal das coleções é formado pelas interfaces da figura abaixo; essas interfaces permitem manipular a coleção independentemente do nível de detalhe que elas representam.
+Temos quatro grandes tipos de coleções: List (lista), Set (conjunto), Queue (fila) e Map (mapa). A partir dessas interfaces, temos muitas subclasses concretas que implementam várias formas diferentes de se trabalhar com cada coleção.
+
+Todas as interfaces e classes são encontradas dentro do pacote (package) java.util.
+Embora a interface Map não seja filha direta da interface Collection, ela também é considerada uma coleção devido à sua função.
+
+https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html <- SUMARIO DE MÉTODOS!
+
+https://github.com/cami-la/collections-java-api-2023/tree/master/src/main/java <- RESUMÃO PRA CONSULTA POSTERIOR
+
+Generics permitem iterar sobre listas de forma mais simples sem fazer cast!
+
+Maps com generics permitem declarar estritamente o tipo de dado e mais uma vez permitem iterações sem cast!
+
+Em Java, Comparable e Comparator são duas interfaces utilizadas para realizar ordenações de objetos.
+
+A interface Comparable define a ordem natural de uma classe. Quando uma classe implementa Comparable, ela precisa sobrescrever o método compareTo(), que define como os objetos dessa classe serão comparados entre si. Isso é útil quando a própria classe tem uma forma principal e única de ser ordenada — por exemplo, ordenar produtos pelo preço.
+
+Já a interface Comparator é usada quando queremos definir várias maneiras diferentes de comparar objetos. Ela é implementada em uma classe separada (ou por uma expressão lambda), que sobrescreve o método compare(). Isso é útil quando precisamos ordenar os mesmos objetos de formas diferentes, como por nome, data ou outro critério específico.
+
+A principal diferença entre elas é que Comparable define a ordenação dentro do próprio objeto, enquanto Comparator permite definir ordenações externas e múltiplas, oferecendo maior flexibilidade.
