@@ -1,28 +1,27 @@
-## 📱 Diagrama UML - Componente iPhone
+## 📱 Diagrama UML - Componente iPhone - Projeto de POO
 
-```plantuml
-@startuml
-interface ReprodutorMusical {
-    +void tocar()
-    +void pausar()
-    +void selecionarMusica(String musica)
-}
+```mermaid
+classDiagram
+    class Iphone
 
-interface AparelhoTelefonico {
-    +void ligar(String numero)
-    +void atender()
-    +void iniciarCorreioVoz()
-}
+    class ReprodutorMusical {
+        +void tocar()
+        +void pausar()
+        +void selecionarMusica(String musica)
+    }
 
-interface NavegadorInternet {
-    +void exibirPagina(String url)
-    +void adicionarNovaAba()
-    +void atualizarPagina()
-}
+    class AparelhoTelefonico {
+        +void ligar(String numero)
+        +void atender()
+        +void iniciarCorreioVoz()
+    }
 
-class Iphone
+    class NavegadorInternet {
+        +void exibirPagina(String url)
+        +void adicionarNovaAba()
+        +void atualizarPagina()
+    }
 
-Iphone ..|> ReprodutorMusical
-Iphone ..|> AparelhoTelefonico
-Iphone ..|> NavegadorInternet
-@enduml
+    Iphone ..|> ReprodutorMusical
+    Iphone ..|> AparelhoTelefonico
+    Iphone ..|> NavegadorInternet
