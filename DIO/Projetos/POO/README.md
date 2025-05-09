@@ -1,4 +1,4 @@
-## 📱 Diagrama UML - Componente iPhone (Mermaid)
+## 📱 Diagrama UML - Componente iPhone - Projeto de POO
 
 ```mermaid
 classDiagram
