@@ -30,24 +30,46 @@ public abstract  class Conta implements Iconta { // <- HERANÇA e ABSTRAÇÃO (t
 
     @Override
     public void sacar(double valor) {
-        saldo -= valor;
+        if(valor <= saldo){
+            saldo -= valor;
+            System.out.println();
+            System.out.println("Sacando " + valor + ", Saldo atual: " + saldo);
+            System.out.println();
+        } else {
+            System.out.println();
+            System.out.println("Valor de saque inválido, consulte seu saldo.");
+            System.out.println();
+        }
     }
 
     @Override
     public void depositar(double valor) {
         saldo += valor;
+        System.out.println();
+        System.out.println("R$" + valor + " foram depositados na sua conta.");
+        System.out.println();
     }
 
     @Override
     public void transferir(double valor, Conta contaDestino) {
-       sacar(valor); // <- Saco (kkkkkk) o valor dessa conta e deposito o valor em outra conta!
-       contaDestino.depositar(valor);
+        if (valor <= saldo){
+             sacar(valor); // <- Saco (kkkkkk) o valor dessa conta e deposito o valor em outra conta!
+            contaDestino.depositar(valor);
+            System.out.println();
+            System.out.println("Tranferência de " + valor + " para a conta com titular: " + contaDestino.cliente.getNome() + ", concluída.");
+            System.out.println();
+        } else {
+            System.out.println("Valor de transferência inválido, consulte seu saldo.");
+        }
+      
     }
 
      protected  void exibirInformacoes() {
+        System.out.println();
         System.out.println(String.format("Titular: %s", this.cliente.getNome()));
         System.out.println(String.format("Agência: %d", this.agencia));
         System.out.println(String.format("Numero: %d", this.numero));
         System.out.println(String.format("Saldo: R$ %.2f", this.saldo));
+        System.out.println();
     }
 }
