@@ -530,3 +530,203 @@ A interface Comparable define a ordem natural de uma classe. Quando uma classe i
 Já a interface Comparator é usada quando queremos definir várias maneiras diferentes de comparar objetos. Ela é implementada em uma classe separada (ou por uma expressão lambda), que sobrescreve o método compare(). Isso é útil quando precisamos ordenar os mesmos objetos de formas diferentes, como por nome, data ou outro critério específico.
 
 A principal diferença entre elas é que Comparable define a ordenação dentro do próprio objeto, enquanto Comparator permite definir ordenações externas e múltiplas, oferecendo maior flexibilidade.
+
+                Stream API
+é uma ferramenta que permite processar coleções de forma funcional, declarativa e concisa. Ela facilita operações como filtrar, mapear, ordenar, agrupar e reduzir elementos de listas, arrays e outras fontes de dados.
+
+bla bla bla 
+
+DRAW.IO PRA FAZER DIAGRAMAS!!!!!
+
+                SpringBoot
+
+Framework opensource recheado de módulos para diferentes coisas como web dev, bancos e dados, testes unitarios e etc.
+
+inversão de controle é redirecionar o fluxo de execucão do código retirando parcialmente o controle sobre ele e delegando-o para um container, pra minimizar o acoplamento do 
+
+injeção de dependências é um padrão de desenvolvimento com a finalidade de manter o baixo nivel de acoplamento entre modulos de um sistema
+
+bens é um objeto instanciado (Criado) montado e gerenciado por um container atraves do principio da inversão de controle
+
+singleton, o container do spring IOC (inversao de controle) define apenas uma instancia do objeto
+
+prototype, será criado um novo objeto a cada solicitação ao container
+
+um bean é criado para cada requisição http, e exitirá enquanto a requisição estiver em execução
+
+http session, um bean será criado para a sessão de usuário, precisamos acessar a mesma solicitação duas vezes para testar os escopos especificos da web
+
+http global, Ou Application Scope cria um bean para o ciclo de vida do contexto da aplicação
+
+autowired Uma anotação (indicação) onde deverá ocorrer uma injeção automática de dependência.
+
+byName: É buscado um método set que corresponde ao nome do Bean.
+
+byType: É considerado o tipo da classe para inclusão do Bean.
+
+byConstrutor: Usamos o construtor para incluir a dependência.
+
+Starters são pacotes prontos (dependências) que o Spring Boot oferece para facilitar a inclusão de funcionalidades na sua aplicação. Eles agrupam várias bibliotecas comuns em um só lugar, para que você não precise configurar tudo manualmente.
+
+Principais Starters do Spring Boot:
+Starter	Para que serve
+spring-boot-starter-web	Aplicações web, APIs REST
+spring-boot-starter-data-jpa	Integração com banco de dados usando JPA/Hibernate
+spring-boot-starter-security	Segurança e autenticação
+spring-boot-starter-test	Testes unitários e de integração
+spring-boot-starter-thymeleaf	Templates HTML usando Thymeleaf
+spring-boot-starter-actuator	Monitoramento da aplicação em tempo real
+spring-boot-starter-validation	Validações com Bean Validation (JSR-380, ex: @NotNull, @Email)
+data-mongodb: Interação com banco de dados mongoDB
+
+Primeiros passos:
+
+Criando um projeto com initializr (Spring initializr na web)
+monta como quiser e bota as dependências, ele vai baixar um .zip
+
+importando o projeto maven no vscode
+tecnicamente ele baixa todas dependências
+
+Conhecendo a estrutura spring boot
+mesmo padrão do java, pom.xml tem informações sobre o projeto
+src/main/resources/application.proprieties é onde botamos informações e configurações sobre portas de servidores e etc, bancos de dados e por ai vai
+
+Bean e CommandLineRunner
+
+
+"new" não existe em springboot, é errado instanciar classes dessa forma, então nada de 
+Pessoa pessoa = new Pessoa("Carlos");
+
+Nosso método main, ou app.java precisa implementar uma interface chamada "CommandLineRunner" e seus métodos, cima dele e logo abaixo das importações devemos ditar que ele irá usar componentes, para isso colocamos @Component, note que precisamos fazer o mesmo nas classes que queremos instanciar! 
+E abaixo da classe instanciamos a classe dessa forma:
+@Autowired
+private Pessoa pessoa;
+ 
+
+
+Use @Component quando você quer que o Spring crie e gerencie uma instância de uma classe automaticamente.
+Onde usar:
+Direto em cima de uma classe que você criou.
+Quando quer que o Spring descubra a classe automaticamente via component scanning.
+
+Exemplo
+@Component
+public class MeuServico {
+    public void executar() {
+        System.out.println("Executando serviço...");
+    }
+}
+
+
+
+Use @Bean quando você quer registrar manualmente um objeto como bean no Spring. É usado dentro de uma classe anotada com @Configuration.
+Onde usar:
+Em métodos de fábrica dentro de classes de configuração.
+Quando precisa criar instâncias de classes de terceiros (que não têm anotações Spring).
+Quando precisa de lógica personalizada para criar o bean.
+
+Exemplo
+@Configuration
+public class ConfiguracaoApp {
+
+    @Bean
+    public MeuServico meuServico() {
+        return new MeuServico();
+    }
+}
+
+
+🧠 Diferença prática
+Característica |	@Component |	@Bean
+Onde usar |	Em uma classe |	Em um método
+Tipo de controle |	Spring instancia automaticamente |	Você instancia manualmente
+Flexibilidade |	Menos flexível |	Mais controle na criação do objeto
+Ideal para	Suas próprias classes |	Bibliotecas de terceiros, ou lógica customizada
+
+Quando usar cada um?
+Situação |	Use
+Classe é sua e simples	@Component
+Classe precisa ser configurada com parâmetros	@Bean
+Classe vem de uma biblioteca externa (sem anotações)	@Bean
+Você quer controle sobre como o objeto é criado	@Bean
+
+É uma convenção criar uma classe "beans" para agrupar os beans!
+as vezes precisamos por @Configuration acima na classe mencionada para não ter erro na injeção de dependências
+
+Se tem acesso ao código fonte use Components, do contrário, Beans
+
+
+O que é escopo (Scope )de um bean?
+No Spring, um bean é um objeto gerenciado pelo container da aplicação. O escopo define quantas instâncias desse objeto serão criadas e como elas serão entregues quando forem requisitadas.
+
+
+ Singleton (padrão do Spring)
+O que é?
+É o escopo padrão no Spring. Significa que o Spring cria apenas uma única instância do bean durante toda a vida da aplicação.
+
+Quando usar?
+Quando o bean não precisa ser recriado a cada uso, ou seja, pode ser compartilhado por toda a aplicação.
+
+Vantagens:
+Consome menos memória.
+Ideal para serviços ou repositórios que mantêm estado compartilhado ou são stateless (sem estado).
+
+Exemplo:
+@Component
+public class MeuServico {
+    // será criada apenas uma instância de MeuServico
+}
+
+
+Prototype
+O que é?
+Um bean com escopo prototype será criado novamente toda vez que for solicitado ao Spring.
+
+Quando usar?
+Quando você precisa de uma nova instância para cada uso — por exemplo, quando o bean tem estado próprio e não pode ser compartilhado.
+
+Vantagens:
+Útil para objetos com estado temporário ou dados dinâmicos.
+Evita efeitos colaterais entre usuários ou requisições.
+
+Exemplo:
+@Scope("prototype")
+@Component
+public class Pedido {
+    // cada vez que for requisitado, um novo Pedido será criado
+}
+
+
+No Spring Boot, o arquivo application.properties serve para guardar configurações da aplicação, como nomes, URLs ou chaves. A anotação @Value é usada para ler essas configurações e injetá-las dentro do código.
+
+Por exemplo, se você tiver app.nome=MinhaApp no application.properties, pode usar @Value("${app.nome}") em uma classe para acessar esse valor. Isso ajuda a manter o código limpo, separado da configuração, e facilita a troca de valores conforme o ambiente (dev, prod, etc.).
+
+Se a propriedade não for encontrada, a aplicação pode dar erro, mas é possível definir um valor padrão assim: @Value("${app.autor:Desconhecido}"). com dois pontos :
+
+@ConfigurationProperties é uma forma do Spring de carregar várias configurações de uma vez em uma classe, ao invés de usar vários @Value. Ela é usada para mapear um grupo de propriedades do application.properties para atributos de uma classe Java.
+
+Em vez de injetar um por um com @Value, você define uma classe com atributos e o Spring preenche tudo de forma automática com base no prefixo configurado.
+Por exemplo, se você tem propriedades como app.nome e app.versao, pode criar uma classe AppProperties, usar @ConfigurationProperties(prefix = "app"), e o Spring liga tudo automaticamente.
+É mais organizado, reutilizável e limpo, principalmente quando há muitas configurações relacionadas.
+
+
+A anotação @ConfigurationProperties(prefix = "algum.prefixo") é usada no Spring para mapear automaticamente propriedades definidas no application.properties (ou application.yml) para os campos de uma classe Java, com base em um prefixo comum.
+
+Exemplo prático em texto:
+Se no application.properties você tem:
+app.nome=MinhaApp
+app.versao=1.0
+
+
+Você pode criar uma classe assim:
+@Configuration
+@ConfigurationProperties(prefix = "app")
+public class AppProperties {
+    private String nome;
+    private String versao;
+    // getters e setters
+}
+O Spring vai preencher nome e versao automaticamente com os valores definidos
+
+A classe precisa estar registrada como bean (com @Component ou usando @EnableConfigurationProperties).
+Requer métodos get e set (ou uso de @Data do Lombok, por exemplo).
