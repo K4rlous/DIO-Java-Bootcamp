@@ -818,3 +818,24 @@ Além dos métodos herdados, o JpaRepository permite definir métodos personaliz
 O JpaRepository também oferece suporte a paginação, ordenação, projeções, e consultas personalizadas usando anotações como @Query (com JPQL ou SQL nativo).
 
 Por estar integrado com o Spring Boot, o uso de JpaRepository também se beneficia da injeção de dependência e da configuração automática de componentes, tornando o desenvolvimento rápido, organizado e aderente às boas práticas do Spring.
+
+
+REST e RESTful:
+
+REST (Representational State Transfer) é um estilo de arquitetura de software para sistemas distribuídos, geralmente usado na construção de APIs. Ele se baseia em um conjunto de restrições, como a utilização de HTTP para comunicação e a utilização de métodos como GET, POST, PUT e DELETE. O REST enfatiza a simplicidade e a escalabilidade.
+
+RESTful refere-se à implementação de uma API que segue as restrições e princípios do REST. Isso significa que a API deve ser baseada em recursos (URLs) e deve utilizar os métodos HTTP de forma adequada.
+
+Controllers:
+
+Controllers (ou controladores) são componentes essenciais na arquitetura de software, particularmente no padrão MVC (Model-View-Controller). Em APIs RESTful, os controladores são responsáveis por manipular as requisições HTTP, interagir com os modelos de dados (como banco de dados) e retornar as respostas apropriadas ao cliente. Os controladores mapeiam as rotas de requisição para as funções específicas que devem ser executadas.
+
+Swagger:
+
+Swagger é uma ferramenta que permite documentar, testar e visualizar APIs de forma interativa. Ela gera documentação interativa de uma API RESTful e permite que os desenvolvedores e usuários interajam diretamente com a API através de uma interface gráfica. Com o Swagger, é possível ver as operações disponíveis, os parâmetros necessários e até testar as chamadas da API de maneira fácil.
+
+Exception Handler:
+
+Exception Handler (ou manipulador de exceções) é um mecanismo utilizado em APIs para tratar erros de maneira adequada. Ele captura exceções (erros) que ocorrem durante o processamento das requisições e fornece respostas apropriadas, como mensagens de erro ou códigos de status HTTP (por exemplo, 404 para "não encontrado" ou 500 para "erro interno do servidor"). O tratamento adequado de exceções é fundamental para garantir que a API seja robusta e fácil de usar, fornecendo informações claras sobre o que deu errado.
+
+Esses são conceitos fundamentais no desenvolvimento de APIs modernas, especialmente quando se busca construir sistemas escaláveis, robustos e bem documentados.
