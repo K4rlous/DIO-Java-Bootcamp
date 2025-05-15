@@ -841,8 +841,631 @@ Exception Handler (ou manipulador de exceções) é um mecanismo utilizado em AP
 Esses são conceitos fundamentais no desenvolvimento de APIs modernas, especialmente quando se busca construir sistemas escaláveis, robustos e bem documentados.
 
 
-                Bancos de Dados!
+                Bancos de Dados Relacionais!
 
 DBMS é o software usado para acessar, manipular e monitorar um sistema de banco de dados! ele é diferente do proprio DB é mais como uma interface gráfica e cada DB tem o seu próprio
 
 MySQL express ou pra dev são iguais, mas use a versão express! pro Mysql precisa de SSMS também (as vezes instalado diretamente do setup do Mysql) ou através do site da microsoft
+
+MER – Modelo Entidade-Relacionamento
+MER (Modelo Entidade-Relacionamento) é uma abordagem conceitual de modelagem de dados, proposta por Peter Chen em 1976. Ele serve para representar de forma abstrata e sem preocupação com tecnologia como os dados se relacionam entre si no domínio do problema.
+
+Principais componentes do MER:
+Entidade: Representa um "objeto" do mundo real (ex: Cliente, Produto).
+
+Representado como retângulo.
+
+Atributo: Propriedade ou característica da entidade (ex: nome, CPF).
+
+Representado como elipse.
+
+Relacionamento: Mostra como as entidades estão conectadas (ex: "compra", "possui").
+
+Representado como losango.
+
+Cardinalidade: Indica a quantidade de ocorrências entre as entidades (1:1, 1:N, N:N).
+
+Exemplo: Um Cliente compra um ou vários Produtos.
+
+DER – Diagrama Entidade-Relacionamento
+DER (Diagrama Entidade-Relacionamento) é a representação gráfica do MER. Ou seja, é o desenho que mostra visualmente as entidades, relacionamentos, atributos e cardinalidades.
+
+É usado para documentar e comunicar a estrutura dos dados entre analistas, desenvolvedores e stakeholders.
+
+Serve como base para transformar o modelo conceitual em modelo lógico e físico, que são implementados no banco de dados.
+
+Diferença entre MER e DER
+Termo |	Significado	Papel
+MER	Modelo Entidade-Relacionamento	É o modelo conceitual (ideia, conceito)
+DER	Diagrama Entidade-Relacionamento	É a representação gráfica (o desenho) do MER
+
+site Creately.com para criar os diagramas!
+app.quickdatabasediagrams.com para fazer diagramas com base no código sql!
+
+banco de dados na nuvem que será usado nas aulas da dio -> clients.cloudclusters.io <- não é gratuito (apenas 7 dias)
+https://accounts.cloudclusters.io/login/?next=https%3A%2F%2Fclients.cloudclusters.io%2F
+
+Comente seus dbs!
+
+Tabela de exemplo da dio
+
+CREATE TABLE usuarios(
+    id INT,
+    nome VARCHAR(255) NOT NULL COMMENT 'Nome do usuario',
+    email VARCHAR(100) NOT NULL UNIQUE COMMENT 'Email do usuario',
+    endereco VARCHAR(50) NOT NULL COMMENT 'Endereço do usuario',
+    data_nascimento DATE NOT NULL COMMENT 'Data de nascimento do usuario');
+
+CREATE TABLE viagens.destinos <-// db viagens tabela destinos = viagens.destinos//> (
+    id INT,
+    nome VARCHAR(255) NOT NULL UNIQUE COMMENT 'Nome do destino',
+    descricao VARCHAR(255) NOT NULL COMMENT 'Descrição do destino'
+);
+
+CREATE TABLE viagens.reservas (
+    id INT COMMENT 'Identificador único da reserva',
+    id_usuario INT COMMENT 'Referência ao ID do usuário que fez a reserva',
+    id_destino INT COMMENT 'Referência ao ID do destino da reserva',
+    data DATE COMMENT 'Data da reserva',
+    status VARCHAR(255) DEFAULT 'pendente' COMMENT 'Status da reserva (confirmada, pendente, cancelada, etc.)'
+);
+
+macete pra copiar dados
+INSERT INTO usuarios_nova (id, nome, email, endereco, data_nascimento)
+SELECT id, nome, email, endereco, data_nascimento
+FROM usuarios;
+
+A normalização de dados é o processo de organizar os dados em um banco de dados para:
+
+Evitar redundâncias
+Garantir integridade dos dados
+Facilitar a manutenção
+Ela é feita em etapas chamadas formas normais (FN). Cada etapa elimina certos problemas. Aqui vai um resumo das principais:
+
+🔹 1ª Forma Normal (1FN)
+Regras: Eliminar atributos multivalorados (nada de listas ou tabelas dentro de colunas).
+
+Objetivo: Cada campo deve conter um único valor atômico.
+✅ Tabela com colunas bem definidas e dados simples.
+
+🔹 2ª Forma Normal (2FN)
+Regras: Estar na 1FN e eliminar dependências parciais (colunas que dependem só de parte da chave primária composta).
+
+Objetivo: Todos os atributos devem depender da chave primária inteira.
+✅ Evita repetição de informações parciais.
+
+🔹 3ª Forma Normal (3FN)
+Regras: Estar na 2FN e eliminar dependências transitivas (atributos que dependem de outro atributo que não é chave).
+
+Objetivo: Todos os atributos devem depender somente da chave primária.
+✅ Remove colunas que não são essenciais para identificar uma linha.
+
+Exemplo rápido:
+Uma tabela de pedidos com:
+
+cliente_nome, cliente_email, produto_nome, quantidade
+
+Problemas:
+
+Dados do cliente se repetem em cada pedido.
+
+Nome do produto também.
+
+Solução com normalização:
+
+Tabela clientes
+
+Tabela produtos
+
+Tabela pedidos com referências (chaves estrangeiras)
+
+
+                Bancos de dados não relacionais
+
+As diferenças entre bancos de dados relacionais (SQL) e não relacionais (NoSQL) estão ligadas à forma como os dados são armazenados, estruturados e consultados. Abaixo está um resumo claro e direto:
+
+📘 Bancos de Dados Relacionais (SQL)
+✅ Estrutura fixa (tabelas) com linhas e colunas
+
+✅ Esquema rígido: exige definição prévia dos campos (tipos, restrições, etc.)
+
+✅ Usa SQL (Structured Query Language) para consultas
+
+✅ Ideal para dados altamente estruturados e com relacionamentos complexos
+
+✅ Transações ACID (Atomicidade, Consistência, Isolamento, Durabilidade)
+
+Exemplos: MySQL, PostgreSQL, Oracle, SQL Server
+
+📙 Bancos de Dados Não Relacionais (NoSQL)
+✅ Estrutura flexível, podendo usar:
+
+Documentos (JSON, BSON) – ex: MongoDB
+
+Chave-valor – ex: Redis
+
+Grafos – ex: Neo4j
+
+Colunar – ex: Cassandra
+
+✅ Sem esquema fixo (schema-less) — cada registro pode ter campos diferentes
+
+✅ Projetado para alta escalabilidade e grandes volumes de dados (Big Data)
+
+✅ Prioriza disponibilidade e performance sobre transações rígidas
+
+✅ Melhor para dados semiestruturados ou desestruturados
+
+Exemplos: MongoDB, Cassandra, Redis, CouchDB, Neo4j
+
+| Característica           | SQL (Relacional)         | NoSQL (Não Relacional)                       |
+| ------------------------ | ------------------------ | -------------------------------------------- |
+| Estrutura                | Tabelas (linhas/colunas) | Documentos, grafos, etc.                     |
+| Esquema                  | Fixo                     | Flexível ou inexistente                      |
+| Linguagem de consulta    | SQL                      | Depende do banco (ex: MongoDB usa JSON-like) |
+| Escalabilidade           | Vertical (mais hardware) | Horizontal (mais servidores)                 |
+| Relacionamentos          | Fortemente suportados    | Limitados ou inexistentes                    |
+| Performance com Big Data | Limitada                 | Otimizada                                    |
+| Transações ACID          | Sim                      | Parcial ou eventual                          |
+
+
+✅ O que é um Banco de Dados NoSQL?
+NoSQL significa "Not Only SQL" e representa uma categoria de bancos de dados que não seguem o modelo relacional tradicional. Eles foram criados para lidar com grandes volumes de dados, alta escalabilidade e estrutura de dados flexível, especialmente em aplicações modernas como redes sociais, sistemas de recomendação, e análise de big data.
+
+🧩 Principais características do NoSQL:
+Sem esquema fixo (schema-less): os dados podem ter formatos variados, como JSON, sem precisar de uma estrutura pré-definida.
+
+Alta escalabilidade: facilitam o crescimento horizontal (adicionar mais servidores).
+
+Alto desempenho: ótimos para leitura e escrita rápida de grandes quantidades de dados.
+
+Flexibilidade: ótimo para dados não estruturados ou semiestruturados (ex: logs, posts, sensores).
+
+Eventual consistency: prioriza disponibilidade e desempenho, podendo abrir mão da consistência imediata (em oposição ao modelo ACID dos bancos relacionais).
+
+📚 Tipos de Bancos NoSQL
+Baseado em Documentos
+
+Armazenam dados em formato tipo JSON/BSON.
+
+Exemplo: MongoDB, CouchDB
+
+Ideal para: Aplicações web, APIs, CMS
+
+Chave-Valor
+
+Dados armazenados como pares chave : valor.
+
+Exemplo: Redis, Riak
+
+Ideal para: Caches, sessões, configuração
+
+Colunar
+
+Armazenam dados por colunas, otimizando leitura de grandes volumes.
+
+Exemplo: Cassandra, HBase
+
+Ideal para: Big Data, data warehouses
+
+Grafos
+
+Dados armazenados como nós e arestas, representando relações complexas.
+
+Exemplo: Neo4j, ArangoDB
+
+Ideal para: Redes sociais, sistemas de recomendação, mapas de rotas
+
+📌 Quando usar NoSQL?
+Use NoSQL quando:
+
+Os dados mudam frequentemente ou têm estrutura variada.
+
+É preciso escalar para milhões de usuários ou registros.
+
+Há necessidade de alta performance em leitura/escrita.
+
+Não é essencial manter consistência rígida em transações.
+
+
+🧠 O que são Grafos?
+Grafos são uma estrutura de dados formada por:
+
+Nódulos (nós): representam entidades (ex: pessoas, cidades, produtos)
+
+Arestas (relacionamentos): representam as ligações entre os nós (ex: amizade, distância, compra)
+
+Cada nó e aresta pode ter propriedades (atributos).
+Esse modelo é ideal para representar relações complexas e interconectadas.
+
+📌 Exemplo de grafo:
+Imagine um grafo com pessoas e amizades:
+(Ana) ----[amiga]----> (João)
+  |                       |
+[amiga]                [amigo]
+  |                       |
+(Rafa) <---[amigo]---- (Carlos)
+Esse tipo de estrutura é ideal para perguntas como:
+
+“Quem são os amigos em comum entre Ana e João?”
+“Qual o caminho mais curto entre duas pessoas?”
+“Quem influencia quem em uma rede social?”
+
+                🧰 O que é o Neo4j?
+Neo4j é o banco de dados de grafos mais popular. Ele armazena dados como nós e relacionamentos diretamente, diferente dos bancos relacionais ou NoSQL documentais.
+
+🔹 Características do Neo4j:
+Modelo de grafo nativo
+
+Consultas com Cypher, uma linguagem própria parecida com SQL
+
+Alta performance em consultas complexas de relacionamentos
+
+Usado em redes sociais, sistemas de recomendação, fraudes, rotas, etc.
+
+Exemplo de consulta em Cypher (Neo4j):
+MATCH (a:Pessoa {nome: "Ana"})-[:AMIGO]->(amigo)
+RETURN amigo.nome
+Interpretação: Retorna os nomes dos amigos de Ana.
+🧩 Exemplo de modelagem:
+Entidades (nós):
+(:Pessoa {nome: "Ana"})
+
+(:Filme {titulo: "Matrix"})
+
+Relacionamento (aresta):
+(Ana)-[:ASSISTIU]->(Matrix)
+
+✅ Quando usar grafos/Neo4j?
+Use quando:
+
+Há muitos relacionamentos entre os dados
+
+Precisa de consultas rápidas em redes (ex: amigos de amigos, rotas, conexões)
+
+Sistemas como: redes sociais, logística, IA, recomendação
+
+Vamos usar o sandboxneo4j.com para aprender grafos!
+https://sandbox.neo4j.com
+
+Comando de criação de nós e relacionamentos
+CREATE
+  (c1:Client {name: "Fulano", hobbies: ["Caça patos"]}),
+  (c2:Client {name: "Beltrano", hobbies: ["Pescaria", "Futebol"]}),
+  (c3:Client {name: "Ciclano", hobbies: ["Leitura", "Xadrez"]}),
+  (c1)-[:AMIGO_DE]->(c2),
+  (c2)-[:AMIGO_DE]->(c3),
+  (c3)-[:AMIGO_DE]->(c1)
+
+
+Note que não há estrutura fixa para criação dos Clients que definimos!
+
+
+comando de retorno de todos (get *)
+MATCH (todos) RETURN todos;
+
+
+ 1. CRIAR NÓS (ENTIDADES)
+CREATE (:Pessoa {nome: "Ana", idade: 30})
+CREATE (:Filme {titulo: "Matrix", ano: 1999})
+
+🔁 2. CRIAR RELACIONAMENTOS
+MATCH (p:Pessoa {nome: "Ana"}), (f:Filme {titulo: "Matrix"})
+CREATE (p)-[:ASSISTIU {avaliacao: 5}]->(f)
+:ASSISTIU é o tipo do relacionamento
+
+{avaliacao: 5} são propriedades do relacionamento
+
+🔍 3. CONSULTAR RELACIONAMENTOS
+MATCH (p:Pessoa)-[:ASSISTIU]->(f:Filme)
+RETURN p.nome, f.titulo
+
+🔁 4. CONSULTAR COM FILTROS
+MATCH (p:Pessoa)-[r:ASSISTIU]->(f:Filme)
+WHERE r.avaliacao >= 4
+RETURN p.nome, f.titulo, r.avaliacao
+
+🕵️‍♂️ 5. ENCONTRAR CAMINHOS
+MATCH (a:Pessoa {nome: "Ana"})-[:AMIGO*1..2]-(amigo)
+RETURN amigo
+*1..2 → encontra amigos em até 2 níveis de conexão
+
+✏️ 6. EDITAR (UPDATE) NÓS E RELAÇÕES
+MATCH (p:Pessoa {nome: "Ana"})
+SET p.idade = 31
+MATCH (:Pessoa {nome: "Ana"})-[r:ASSISTIU]->(:Filme {titulo: "Matrix"})
+SET r.avaliacao = 4
+
+🧽 7. REMOVER DADOS
+Deletar um relacionamento:
+MATCH (:Pessoa {nome: "Ana"})-[r:ASSISTIU]->(:Filme {titulo: "Matrix"})
+DELETE r
+Deletar um nó (sem relacionamentos):
+MATCH (p:Pessoa {nome: "Ana"})
+DELETE p
+Forçar deletar um nó com relacionamentos:
+MATCH (p:Pessoa {nome: "Ana"})
+DETACH DELETE p
+
+🧮 8. CONTAR E AGRUPAR
+MATCH (:Pessoa)-[:ASSISTIU]->(f:Filme)
+RETURN f.titulo, COUNT(*) AS total_assistido
+🌐 9. IMPORTANTE: TIPAGEM
+:Label → define o tipo do nó (:Pessoa, :Filme)
+
+[RELACIONAMENTO] → define a relação entre dois nós
+
+Propriedades → chave-valor em { }
+
+🔄 10. CRIAR TUDO DE UMA VEZ
+CREATE (a:Pessoa {nome: "Carlos"})-[:AMIGO]->(b:Pessoa {nome: "Bruno"})
+
+
+                O que é o Apache Cassandra?
+Cassandra é um banco de dados NoSQL distribuído e orientado a colunas, criado pelo Facebook e depois aberto para a comunidade Apache.
+
+Ele é feito para escalar horizontalmente e lidar com grandes volumes de dados com alta disponibilidade, mesmo com falhas de nós no cluster.
+
+🔑 Principais características do Cassandra:
+📦 Modelo colunar (como se fossem tabelas com colunas dinâmicas)
+🧱 Alta escalabilidade horizontal (basta adicionar nós)
+⚙️ Alta disponibilidade e tolerância a falhas
+🛡️ Sem ponto único de falha
+🧮 Baseado no modelo de chave primária + colunas
+🚀 Ideal para aplicações com escrita intensa e grandes volumes de dados
+
+📚 Terminologia básica
+| Conceito          | Explicação                                  |
+| ----------------- | ------------------------------------------- |
+| **Cluster**       | Conjunto de nós Cassandra                   |
+| **Node**          | Um servidor do cluster                      |
+| **Keyspace**      | Equivale a um banco de dados                |
+| **Table**         | Conjunto de registros (linhas e colunas)    |
+| **Row**           | Registro com chave primária                 |
+| **Partition Key** | Chave usada para distribuir dados entre nós |
+| **CQL**           | Cassandra Query Language (semelhante a SQL) |
+
+
+ TUTORIALZÃO: comandos em CQL (Cassandra Query Language)
+✅ 1. Criar um Keyspace
+CREATE KEYSPACE minha_app
+WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+SimpleStrategy: uso local (desenvolvimento)
+
+replication_factor: número de cópias dos dados
+
+✅ 2. Usar o Keyspace
+USE minha_app;
+
+✅ 3. Criar uma Tabela
+CREATE TABLE usuarios (
+  id UUID PRIMARY KEY,
+  nome TEXT,
+  email TEXT,
+  idade INT
+);
+PRIMARY KEY: obrigatório; define a chave de partição e ordenação.
+
+✅ 4. Inserir dados
+INSERT INTO usuarios (id, nome, email, idade)
+VALUES (uuid(), 'Ana', 'ana@email.com', 25);
+
+✅ 5. Buscar dados
+SELECT * FROM usuarios;
+
+✅ 6. Buscar por chave primária
+SELECT * FROM usuarios WHERE id = 9f4c0b8b-40d6-4a3d-81a9-12ef3894f15a;
+⚠️ Cassandra só permite WHERE com a chave primária ou índices criados.
+
+✅ 7. Atualizar dados
+UPDATE usuarios SET idade = 26 WHERE id = 9f4c0b8b-40d6-4a3d-81a9-12ef3894f15a;
+
+✅ 8. Deletar dados
+DELETE FROM usuarios WHERE id = 9f4c0b8b-40d6-4a3d-81a9-12ef3894f15a;
+
+✅ 9. Criar índice secundário (para filtrar por outro campo)
+CREATE INDEX ON usuarios (email);
+
+✅ 10. Consultar com índice secundário
+SELECT * FROM usuarios WHERE email = 'ana@email.com';
+
+🧠 Quando usar Cassandra?
+Use Cassandra quando você precisa de:
+Grande volume de dados distribuídos
+Escritas rápidas e escaláveis
+Alta disponibilidade mesmo com falhas
+Eventual consistency (consistência eventual)
+Baixa latência
+
+🚀 Extras:
+📥 Ferramenta para usar CQL:
+CLI: cqlsh (instalado com Cassandra)
+GUI: DataStax Studio
+
+
+                🧠 O que é o Redis?
+Redis (REmote DIctionary Server) é um banco de dados NoSQL em memória, extremamente rápido, usado como:
+
+Banco de dados chave-valor
+Cache
+Fila de mensagens (Pub/Sub)
+Armazenamento temporário
+
+🔑 Características principais:
+| Característica               | Explicação                                     |
+| ---------------------------- | ---------------------------------------------- |
+| 🔥 **Ultra rápido**          | Armazenado em memória RAM                      |
+| ⚙️ **Estrutura chave-valor** | Trabalha com strings, listas, hashes, sets etc |
+| 🧱 **Simples e leve**        | Ótimo para cache, contadores, sessões etc      |
+| 🔁 **Persistência opcional** | Pode salvar dados em disco                     |
+| 📦 **Suporta TTL**           | Expiração de chaves (ideal pra cache)          |
+
+Instalação (via Docker — mais fácil)
+docker run --name redis -p 6379:6379 -d redis
+Depois disso, você pode acessar com:
+
+docker exec -it redis redis-cli
+📚 REDIS TUTORIALZÃO – COMANDOS ESSENCIAIS
+
+✅ 1. Setar e obter valores (strings)
+SET nome "Fulano"
+GET nome
+
+⏱️ 2. Setar com tempo de expiração
+SET email "fulano@email.com" EX 60  # expira em 60 segundos
+
+✅ 3. Trabalhar com contadores
+INCR visitas
+INCRBY visitas 10
+DECR visitas
+GET visitas
+
+✅ 4. Listas (tipo pilha/fila)
+LPUSH tarefas "Lavar roupa"
+LPUSH tarefas "Estudar Redis"
+RPUSH tarefas "Jogar bola"
+
+LRANGE tarefas 0 -1  # Mostra tudo na lista
+LPOP tarefas         # Remove do início
+RPOP tarefas         # Remove do fim
+
+✅ 5. Hashes (semelhante a objetos ou dicionários)
+HSET usuario:1 nome "Ana" email "ana@email.com"
+HGETALL usuario:1
+HGET usuario:1 nome
+
+✅ 6. Sets (conjuntos, sem repetição)
+SADD amigos "João" "Maria" "Carlos"
+SMEMBERS amigos
+SISMEMBER amigos "João"
+SREM amigos "Carlos"
+
+✅ 7. Sorted Sets (com pontuação)
+ZADD ranking 100 "João"
+ZADD ranking 200 "Ana"
+ZADD ranking 150 "Carlos"
+
+ZRANGE ranking 0 -1 WITHSCORES   # ordem crescente
+ZREVRANGE ranking 0 -1 WITHSCORES # ordem decrescente
+
+✅ 8. Verificar existência e deletar chave
+EXISTS nome
+DEL nome
+
+✅ 9. Tempo de vida (TTL)
+TTL email
+EXPIRE email 120
+
+✅ 10. Pub/Sub (mensageria)
+Terminal 1 – assinando canal:
+
+SUBSCRIBE noticias
+Terminal 2 – publicando:
+
+PUBLISH noticias "Nova notícia publicada!"
+🔥 Exemplo de modelagem Redis para usuários
+# Criar usuário com ID 1
+HSET user:1 name "Bruno" email "bruno@ex.com"
+SADD user:1:hobbies "Futebol" "Filmes"
+
+✅ Quando usar Redis?
+Cache de páginas, sessões ou tokens
+Contadores em tempo real (views, likes)
+Armazenar filas ou tarefas
+Ranking de jogadores, pontuações
+Sistema de chat ou notificação com Pub/Sub
+
+
+                🧠 O que é o MongoDB?
+MongoDB é um banco de dados NoSQL orientado a documentos, que armazena dados no formato JSON (na prática, BSON).
+
+Em vez de tabelas e linhas como bancos relacionais, o MongoDB usa:
+Coleções (equivalente a tabelas)
+Documentos (equivalente a registros)
+
+🔑 Principais características:
+| Recurso                         | Explicação                                      |
+| ------------------------------- | ----------------------------------------------- |
+| 📄 **Documentos JSON-like**     | Estrutura flexível, sem esquema fixo            |
+| 🚀 **Escalável e performático** | Escalabilidade horizontal com sharding          |
+| 📂 **Coleções**                 | Conjuntos de documentos                         |
+| 🔎 **Consultas poderosas**      | Com filtros, projeções e agregações             |
+| 📌 **Índices**                  | Suporte a índices, texto completo, geoespaciais |
+| 🔐 **Alta disponibilidade**     | Suporte a replicação (replica sets)             |
+
+🛠️ Como usar o MongoDB
+📦 Instalar (via Docker)
+docker run -d -p 27017:27017 --name mongo mongo
+Acesse com MongoDB Compass (GUI) ou pela CLI:
+
+docker exec -it mongo mongosh
+📚 TUTORIALZÃO – Comandos MongoDB (via mongosh)
+✅ 1. Criar banco e coleção
+use minha_app   // cria ou seleciona o banco
+db.createCollection("usuarios")  // opcional; é criado automaticamente ao inserir
+
+✅ 2. Inserir documentos
+db.usuarios.insertOne({
+  nome: "Fulano",
+  email: "fulano@email.com",
+  idade: 30,
+  hobbies: ["ler", "correr"]
+})
+db.usuarios.insertMany([
+  { nome: "Beltrano", idade: 25 },
+  { nome: "Ciclano", idade: 40 }
+])
+
+✅ 3. Buscar documentos
+db.usuarios.find()               // todos
+db.usuarios.find({ idade: 30 })  // filtrado
+db.usuarios.findOne({ nome: "Fulano" })
+
+✅ 4. Atualizar documentos
+db.usuarios.updateOne(
+  { nome: "Fulano" },
+  { $set: { idade: 31 } }
+)
+
+✅ 5. Deletar documentos
+db.usuarios.deleteOne({ nome: "Fulano" })
+db.usuarios.deleteMany({ idade: { $lt: 30 } })
+
+✅ 6. Projeção (mostrar campos específicos)
+db.usuarios.find({}, { nome: 1, _id: 0 })
+
+✅ 7. Filtros avançados
+db.usuarios.find({ idade: { $gt: 25 } })           // idade maior que 25
+db.usuarios.find({ hobbies: { $in: ["correr"] } }) // se contém hobby
+
+✅ 8. Índices
+db.usuarios.createIndex({ email: 1 })
+
+✅ 9. Ordenar e limitar
+db.usuarios.find().sort({ idade: -1 }).limit(5)
+
+✅ 10. Agregações (ex: média de idade)
+db.usuarios.aggregate([
+  { $group: { _id: null, media: { $avg: "$idade" } } }
+])
+
+🔁 Modelagem Exemplo
+db.pedidos.insertOne({
+  cliente: {
+    nome: "João",
+    email: "joao@email.com"
+  },
+  itens: [
+    { produto: "Teclado", preco: 100 },
+    { produto: "Mouse", preco: 50 }
+  ],
+  data: new Date()
+})
+
+📌 Quando usar MongoDB?
+Use quando:
+
+Precisa de estrutura flexível (sem esquema fixo)
+Precisa de velocidade de leitura/escrita
+Precisa lidar com documentos complexos (aninhados)
+Quer escalar facilmente com clusters
