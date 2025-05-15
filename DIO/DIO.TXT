@@ -839,3 +839,10 @@ Exception Handler:
 Exception Handler (ou manipulador de exceções) é um mecanismo utilizado em APIs para tratar erros de maneira adequada. Ele captura exceções (erros) que ocorrem durante o processamento das requisições e fornece respostas apropriadas, como mensagens de erro ou códigos de status HTTP (por exemplo, 404 para "não encontrado" ou 500 para "erro interno do servidor"). O tratamento adequado de exceções é fundamental para garantir que a API seja robusta e fácil de usar, fornecendo informações claras sobre o que deu errado.
 
 Esses são conceitos fundamentais no desenvolvimento de APIs modernas, especialmente quando se busca construir sistemas escaláveis, robustos e bem documentados.
+
+
+                Bancos de Dados!
+
+DBMS é o software usado para acessar, manipular e monitorar um sistema de banco de dados! ele é diferente do proprio DB é mais como uma interface gráfica e cada DB tem o seu próprio
+
+MySQL express ou pra dev são iguais, mas use a versão express! pro Mysql precisa de SSMS também (as vezes instalado diretamente do setup do Mysql) ou através do site da microsoft
