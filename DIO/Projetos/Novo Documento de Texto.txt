@@ -1,0 +1,4 @@
+spring initializr (dep: spring web, spring data jpa, h2 database, postgresql driver
+figma, chatgpt(mermaid) jpa
+springboot, java
+railway(postgresql ci/cd da api)
