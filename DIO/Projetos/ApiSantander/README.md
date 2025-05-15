@@ -1,1 +1,1 @@
-# Meu deus, quase fiquei maluco
+# Verificar questão da conexão com db!
