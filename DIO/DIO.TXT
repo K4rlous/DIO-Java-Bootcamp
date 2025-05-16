@@ -731,6 +731,8 @@ O Spring vai preencher nome e versao automaticamente com os valores definidos
 A classe precisa estar registrada como bean (com @Component ou usando @EnableConfigurationProperties).
 Requer métodos get e set (ou uso de @Data do Lombok, por exemplo).
 
+Lombok é uma biblioteca Java que simplifica a escrita de código Java, reduzindo código boilerplate (código repetitivo e comum, como getters e setters) através do uso de anotações.
+
 No contexto do Spring Boot, os conceitos de ORM e JPA são fundamentais para facilitar o trabalho com bancos de dados de forma orientada a objetos.
 
 ORM, sigla para Object-Relational Mapping (Mapeamento Objeto-Relacional), é uma técnica que permite mapear objetos do código (como classes Java) para tabelas de um banco de dados relacional. Isso significa que, ao invés de escrever comandos SQL diretamente, o desenvolvedor pode manipular dados por meio de objetos Java, enquanto o ORM cuida automaticamente da conversão entre esses objetos e os dados no banco.
@@ -1895,7 +1897,51 @@ Comandos de Agregação Simples: count(), distinct(). São convenientes para ope
 
 Em resumo, o Aggregation Pipeline é a ferramenta principal e mais eficiente para realizar análises e transformações de dados complexas diretamente no MongoDB. Ele oferece uma sintaxe declarativa e poderosa para lidar com uma vasta gama de necessidades de processamento de dados.
 
+🎯 O que é o DBeaver?
+O DBeaver é uma ferramenta gráfica (GUI) para gerenciar bancos de dados. Ele é tipo um "Workbench mais poderoso e mais universal".
 
+✅ O que ele faz?
+Conecta com vários tipos de banco de dados: MySQL, PostgreSQL, Oracle, SQLite, SQL Server, MariaDB, MongoDB, e mais.
+
+Permite criar, visualizar, editar tabelas e dados.
+
+Executa queries SQL com destaque de sintaxe e histórico.
+
+Mostra relações entre tabelas visualmente (tipo diagramas ER).
+
+É ótimo pra trabalhar com Docker, porque você conecta ao banco que roda dentro de um container com alguns cliques.
+
+🆚 DBeaver x MySQL Workbench
+| Funcionalidade       | DBeaver    | MySQL Workbench |
+| -------------------- | ---------- | --------------- |
+| Multi-banco          | ✅ Sim      | ❌ Só MySQL      |
+| Open Source          | ✅ Sim      | ✅ Sim           |
+| Interface moderna    | ✅ Boa      | 🟡 Média        |
+| Extensível (plugins) | ✅ Sim      | ❌ Não           |
+| Leveza/performance   | 🟡 Mediana | ✅ Boa com MySQL |
+
+🧪 Exemplo prático:
+Se você tem um MySQL rodando no Docker, no DBeaver é só:
+
+Abrir o app.
+
+Clicar em "New Database Connection".
+
+Escolher MySQL.
+
+Colocar:
+
+Host: localhost
+
+Porta: 3306
+
+Usuário: root (ou o que tiver)
+
+Senha: (aquela do -e MYSQL_ROOT_PASSWORD)
+
+Conectar.
+
+E pronto, você visualiza o banco sem precisar decorar comandos, montar CLI ou lidar com configuração chata.
 
 
 
