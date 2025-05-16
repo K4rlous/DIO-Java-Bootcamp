@@ -1,1 +1,0 @@
-# Verificar questão da conexão com db!
