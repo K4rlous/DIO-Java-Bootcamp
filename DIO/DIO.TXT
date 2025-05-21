@@ -2326,3 +2326,117 @@ Suporte à governança e conformidade.
 
 ---- Fim anexo README
 
+Tipos de Serviço de Nuvem
+
+Na Microsoft Azure, os modelos de computação em nuvem IaaS, PaaS e SaaS são oferecidos com diversas soluções específicas. Abaixo está uma explicação simples de cada modelo com exemplos práticos da plataforma:
+
+🔹 IaaS (Infrastructure as a Service)
+Definição:
+Você aluga infraestrutura de TI — servidores, redes, sistemas operacionais, armazenamento — em vez de comprá-la e mantê-la.
+
+Responsabilidade do cliente:
+Você gerencia o sistema operacional, as aplicações, os dados e as configurações. A Azure gerencia o hardware e a infraestrutura básica.
+
+Exemplos na Azure:
+
+Azure Virtual Machines (VMs): máquinas virtuais que você pode configurar com o sistema operacional e softwares desejados.
+
+Azure Virtual Network: permite configurar redes privadas.
+
+Azure Load Balancer, Azure Storage: armazenamento e balanceamento de carga.
+
+Caso de uso:
+Hospedar sistemas legados, ambientes de teste, servidores personalizados, controle total do sistema operacional.
+
+🔹 PaaS (Platform as a Service)
+Definição:
+Fornece uma plataforma gerenciada para que você desenvolva, execute e gerencie aplicações sem se preocupar com a infraestrutura.
+
+Responsabilidade do cliente:
+Você gerencia apenas o código da aplicação e os dados. A Azure cuida do resto (SO, middleware, escalabilidade etc.).
+
+Exemplos na Azure:
+
+Azure App Service: hospedagem de aplicações web e APIs.
+
+Azure SQL Database: banco de dados SQL como serviço.
+
+Azure Functions: funções serverless que executam código sob demanda.
+
+Azure Kubernetes Service (AKS): orquestração de containers.
+
+Caso de uso:
+Desenvolvimento ágil, apps web e móveis, integração contínua/entrega contínua (CI/CD).
+
+🔹 SaaS (Software as a Service)
+Definição:
+Software totalmente gerenciado que você acessa via internet. Nenhuma preocupação com infraestrutura, plataforma ou manutenção.
+
+Responsabilidade do cliente:
+Apenas usa o software. Tudo é gerenciado pela Microsoft.
+
+Exemplos na Azure (via Microsoft):
+
+Microsoft 365 (Outlook, Word, Excel online, Teams).
+
+Dynamics 365: CRM e ERP em nuvem.
+
+Power BI: plataforma de análise de dados.
+
+Caso de uso:
+E-mail corporativo, gestão de relacionamento com clientes, análise de dados, produtividade.
+
+🧩 Resumo comparativo:
+| Característica          | IaaS                       | PaaS                      | SaaS                        |
+| ----------------------- | -------------------------- | ------------------------- | --------------------------- |
+| Nível de controle       | Alto                       | Médio                     | Baixo                       |
+| Gerenciado pelo cliente | Infraestrutura de software | Aplicações e dados        | Apenas uso final            |
+| Exemplo na Azure        | Azure VM, Storage          | App Service, SQL Database | Microsoft 365, Dynamics 365 |
+
+Os modelos IaaS, PaaS e SaaS são modelos de entrega de serviço, não estão limitados à nuvem pública.
+Em uma nuvem privada, a própria empresa assume o papel de "provedor" interno, oferecendo esses serviços aos seus usuários ou departamentos.
+
+
+Modelo de Responsabilidade Compartilhada
+
+O modelo de responsabilidade compartilhada define quais partes são responsabilidade do provedor de nuvem (como Azure, AWS, GCP) e quais são do cliente, dependendo do tipo de serviço usado (IaaS, PaaS, SaaS).
+
+Esse modelo é fundamental para segurança, conformidade e operação correta em ambientes de nuvem.
+
+🛡️ Modelo de Responsabilidade Compartilhada – Visão Geral
+| Tipo de Serviço | Provedor é responsável por...                             | Cliente é responsável por...                                  |
+| --------------- | --------------------------------------------------------- | ------------------------------------------------------------- |
+| **IaaS**        | Infraestrutura física, rede, armazenamento, virtualização | Sistema operacional, aplicações, dados, segurança dos acessos |
+| **PaaS**        | Infraestrutura, SO, middleware, runtime, escalabilidade   | Aplicação, lógica de negócio, dados, contas de usuário        |
+| **SaaS**        | Tudo (infraestrutura, aplicação, segurança do sistema)    | Dados inseridos, configurações de uso, controle de acesso     |
+
+📊 Comparação Visual Simplificada
+Responsabilidade:
++----------------------------+------------+------------+------------+
+| Camada / Componente       | IaaS       | PaaS       | SaaS       |
++----------------------------+------------+------------+------------+
+| Aplicações                | Cliente    | Cliente    | Provedor   |
+| Dados                     | Cliente    | Cliente    | Cliente    |
+| Runtime / Middleware      | Cliente    | Provedor   | Provedor   |
+| Sistema Operacional       | Cliente    | Provedor   | Provedor   |
+| Virtualização             | Provedor   | Provedor   | Provedor   |
+| Servidores físicos        | Provedor   | Provedor   | Provedor   |
+| Armazenamento / Rede      | Provedor   | Provedor   | Provedor   |
++----------------------------+------------+------------+------------+
+
+Em modelos on premises (no local) todas as responsabilidades ficam para o cliente!
+
+🔐 Exemplo com Microsoft Azure
+| Serviço da Azure           | Modelo | Responsabilidade do Cliente                                         |
+| -------------------------- | ------ | ------------------------------------------------------------------- |
+| **Azure Virtual Machines** | IaaS   | Instalar/atualizar SO, configurar firewall, criptografar dados      |
+| **Azure App Service**      | PaaS   | Subir o código da aplicação, proteger endpoints, gerenciar usuários |
+| **Microsoft 365**          | SaaS   | Gerenciar usuários, senhas, permissões, proteger dados              |
+
+
+🧠 Por que isso importa?
+Segurança: mal-entendidos sobre responsabilidades levam a brechas.
+
+Compliance: saber o que é gerenciado por quem é essencial para normas como LGPD, ISO 27001, etc.
+
+Suporte: quando algo dá errado, saber se o problema é com o provedor ou cliente agiliza a resposta.
