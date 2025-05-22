@@ -2891,3 +2891,16 @@ Backup de configuração: serve como registro da estrutura dos recursos e suas c
 
 -- FIM DO ANEXO DO README
 
+Criação de Redes Virtuais VNets 
+
+Uma vez que VMs precisam receber um IP, criaremos uma rede virtual para abrangir os recursos que criaremos futuramente!
+
+01 - As redes virtuais podem ser encontradas na aba 'Base da Rede' no portal da Azure 
+
+02 - Escolhemos a assinatura e o grupo de recursos (vamos utilizar o que criamos previamente), definimos o nome da rede virtual e sua região
+
+03 - Vamos resumir o processo, mas caso seja necessário há como configurar detalhes de segurança, endereçamento IP e rótulos (que vimos nos grupos de recursos)
+
+04 - Vamos revisar e criar a VNet
+
+05 - Após a implementação, a VNet já estará presente em nosso grupo de recursos!
