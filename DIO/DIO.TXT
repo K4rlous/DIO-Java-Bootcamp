@@ -2788,6 +2788,106 @@ Essa estrutura permite controle eficiente, governança, segurança e organizaç�
 
 
 
+Criação de Grupo de Recursos
+*A pasta 'images' contém capturas de tela que visam auxiliar no processo de criação de recursos no Azure!
 
+01 - O grupo de recursos pode ser encontrado na aba "Geral" no painel de serviços do Azure
 
+02 - Escolhemos a assinatura que iremos utilizar (empresas costumam ter várias assinaturas), definimos o nome do grupo de recursos e sua região
+
+03 - Se necessário definimos as marcações do grupo de recursos, isso auxiliará a compreender a fatura, uma vez que a formatação dela possa ser confusa na ausência de informações, as marcações também tem um propósito organizacional
+
+04 - Por fim podemos validar e finalmente criar nosso grupo de recursos
+
+05 - Nosso grupo de recursos será criado, e já poderemos criar outros recursos como VMs e etc em seu interior
+
+06 - No interior do grupo de recursos temos acesso a várias abas com incontáveis funcionalidades, vamos resumir brevemente as operações que se encontram no painel esquerdo do portal
+
+Visão geral:
+Exibe informações gerais sobre o grupo de recursos, como localização, assinaturas associadas, e os recursos contidos nele.
+
+Log de atividade:
+Mostra um histórico das ações realizadas no grupo de recursos, útil para auditoria e rastreamento de mudanças.
+
+IAM (Controle de acesso):
+Gerencia permissões de usuários e grupos no grupo de recursos. Aqui você define quem pode acessar e o que pode fazer (RBAC – Controle de Acesso Baseado em Funções), é ideal sempre dar o menor nível de acesso para os usuários.
+
+Marcações:
+Permite adicionar pares chave-valor aos recursos, facilitando a organização, categorização e a gestão de custos.
+
+Visualizador de recursos:
+Apresenta uma visualização hierárquica dos recursos no grupo, mostrando dependências e relações entre eles.
+
+Eventos:
+Exibe eventos de diagnóstico e alertas configurados para os recursos do grupo, auxiliando no monitoramento e resposta a incidentes.
+
+ABA DE CONFIGURAÇÕES:
+
+Implantações:
+Lista e detalha todas as implantações feitas no grupo de recursos, como templates ARM. Útil para rastrear o histórico e reverter configurações.
+
+Segurança:
+Exibe recomendações de segurança e o status atual baseado no Microsoft Defender for Cloud. Ajuda a identificar vulnerabilidades nos recursos.
+
+Pilhas de implantação:
+Gerencia configurações de infraestrutura como código (IaC) com controle total de ciclo de vida dos recursos criados por uma pilha.
+
+Políticas:
+Mostra as políticas do Azure atreladas ao grupo de recursos, como restrições de tipos de recursos ou exigência de marcações.
+
+Propriedades:
+Exibe metadados do grupo, como ID, assinatura, região e data de criação.
+
+Bloqueios:
+Permite adicionar bloqueios de leitura ou exclusão para proteger os recursos contra modificações ou remoções acidentais.
+
+ABA DE GERENCIAMENTO DE CUSTOS 
+
+Análise de custo:
+Permite visualizar detalhadamente os custos dos recursos utilizados no grupo. Você pode filtrar por período, serviço, região, etc., para entender onde estão sendo gerados os maiores gastos.
+
+Alertas de custo (versão prévia):
+Cria alertas automáticos com base em valores de gasto pré-definidos. Ajuda a detectar picos de custo antes que ultrapassem o orçamento.
+
+Orçamentos:
+Define limites de gastos e períodos (mensal, trimestral, etc.). Quando o gasto se aproxima ou ultrapassa o valor definido, você recebe notificações.
+
+Recomendações do supervisor:
+Exibe sugestões automatizadas de economia, como redução de tamanho de máquinas virtuais subutilizadas, desligamento de recursos ociosos, entre outras.
+
+ABA DE MONITORAMENTO
+
+Insights (versão prévia):
+Visualização centralizada e inteligente do desempenho e integridade dos recursos. Fornece recomendações e gráficos baseados em dados de monitoramento.
+
+Alertas:
+Permite configurar alertas com base em métricas, logs ou eventos. Por exemplo, enviar um e-mail se o uso de CPU ultrapassar um limite.
+
+Métrica:
+Visualiza dados de desempenho em tempo real, como uso de CPU, memória, disco e rede dos recursos. Essencial para análise técnica.
+
+Configurações de diagnóstico:
+Define quais logs e métricas devem ser coletados e enviados para destinos como Log Analytics, Event Hub ou Armazenamento.
+
+Logs:
+Acesso ao Azure Monitor Logs, onde você pode usar a linguagem Kusto Query Language (KQL) para consultar eventos e diagnósticos.
+
+Recomendações do supervisor:
+Sugestões para melhorar desempenho, segurança e reduzir custos com base na análise dos recursos.
+
+Pastas de trabalho:
+Dashboards interativos que permitem combinar métricas, logs e visualizações personalizadas para monitoramento avançado.
+
+ABA DE AUTOMAÇÃO 
+
+O botão Exportar modelo permite gerar um modelo ARM (Azure Resource Manager) em formato JSON com a definição de todos os recursos presentes no grupo de recursos atual.
+
+Para que serve:
+Infraestrutura como código (IaC): você pode reutilizar esse modelo para criar grupos de recursos idênticos em outros ambientes.
+
+Automatização de deploys: integra com pipelines DevOps ou scripts.
+
+Backup de configuração: serve como registro da estrutura dos recursos e suas configurações.
+
+-- FIM DO ANEXO DO README
 
