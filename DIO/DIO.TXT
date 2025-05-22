@@ -2904,3 +2904,5 @@ Uma vez que VMs precisam receber um IP, criaremos uma rede virtual para abrangir
 04 - Vamos revisar e criar a VNet
 
 05 - Após a implementação, a VNet já estará presente em nosso grupo de recursos!
+
+-- fim do anexo
