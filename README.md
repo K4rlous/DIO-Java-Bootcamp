@@ -3192,3 +3192,5 @@ A hierarquia é:
 **Grupos de Gerenciamento → Assinaturas → Grupos de Recursos → Recursos**  
 
 Essa estrutura permite controle eficiente, governança, segurança e organização escalável em ambientes corporativos no Azure.
+
+## Continuação sobre Azure e afins [aqui!](https://github.com/K4rlous/resumo-cloudAzure)
